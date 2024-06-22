@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - جوجل</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #5e3f94; /* لون بنفسجي مستوحى من الصورة */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-container img {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #1a73e8; /* لون أزرق مستوحى من جوجل */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0b60df; /* لون أزرق داكن مستوحى من جوجل */
+        }
+
+        .forgot-password {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .create-account {
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <img src="https://www.gstatic.com/images/branding/product/2x/google_cloud_96dp.png" alt="Google Logo">
+        <h2>تسجيل الدخول إلى جوجل</h2>
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <input type="text" name="username" placeholder="اسم المستخدم" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="كلمة المرور" required>
+            </div>
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+        <div class="forgot-password">
+            <a href="#">هل نسيت كلمة المرور؟</a>
+        </div>
+        <div class="create-account">
+            <p>ليس لديك حساب؟ <a href="#">إنشاء حساب جديد</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
